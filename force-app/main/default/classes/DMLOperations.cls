@@ -52,10 +52,10 @@ public with sharing class DMLOperations {
      */
     public static void createAccount(String name, String industry) {
         // Create a new Account and set the fields inline
-        Account newAccount = new Account(name = 'Test Account', industry = 'Technology');
+        Account myAccount = new Account(name = 'Test Account', industry = 'Technology');
 
         // Insert the Account
-        insert newAccount;
+        insert myAccount;
     }
 
     
@@ -74,7 +74,7 @@ public with sharing class DMLOperations {
         myContact.LastName = 'Smith';
 
         // Set the AccountId field to the given accountId
-        myContact.AccountId = newAccout.Id;
+        myContact.AccountId = accountId;
 
         // Insert the Contact into the database
         insert myContact;
