@@ -31,13 +31,17 @@ public with sharing class DMLOperations {
      */
     public static Id insertNewAccount() {
         // Create a new Account instance
-
+    Account acc = new Account();
         // Set some fields on the Account
-
+        acc.Name = 'Full Circle SFDC';
+        acc.Website = 'www.fullcirclesfdc.com';
+        acc.Phone = '513-290-7946';
         // Insert the Account into the database
-
+        insert acc;
         // Return the Id of the newly created Account
-        return null;
+        
+
+        return acc.Id;
     }
 
     /**
@@ -48,8 +52,10 @@ public with sharing class DMLOperations {
      */
     public static void createAccount(String name, String industry) {
         // Create a new Account and set the fields inline
+        Account newAccount = new Account(name = 'Test Account', industry = 'Technology');
 
         // Insert the Account
+        insert newAccount;
     }
 
     
@@ -61,14 +67,19 @@ public with sharing class DMLOperations {
      */
     public static Id insertNewContact(Id accountId) {
         // Create a new Contact instance
+        Contact myContact = new Contact();
 
         // Set some fields on the Contact
+        myContact.FirstName = 'Jim';
+        myContact.LastName = 'Smith';
+
         // Set the AccountId field to the given accountId
+        myContact.AccountId = newAccout.Id;
 
         // Insert the Contact into the database
-
+        insert myContact;
         // Return the Id of the newly created Contact
-        return null;
+        return myContact.Id;
     }
 
     /**
