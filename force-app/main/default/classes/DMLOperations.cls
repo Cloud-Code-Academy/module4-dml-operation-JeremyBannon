@@ -233,7 +233,7 @@ public with sharing class DMLOperations {
         // Loop through each Lead name
         Lead lead1 = new Lead(LastName = 'Smith', Company = 'Test1');
         Lead Lead2 = new Lead(LastName = 'Fill', Company = 'Test2');
-        // Insert the Leads
+        // Insert the Lead
         insert lead1;
         insert lead2;
         // Delete the Leads
