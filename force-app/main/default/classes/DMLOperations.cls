@@ -166,9 +166,21 @@ public with sharing class DMLOperations {
      * @param oppNames The list of Opportunity names.
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
+        Account accName = new Account(Name = 'Test Account');
+        insert accName;
         // Loop through each Opportunity name
-            // Create an Opportunity with the given name
-            // Add the Opportunity to the list
+        
+        // Create an Opportunity with the given name
+        List<Opportunity> oppList = new List<Opportunity>();
+        Opportunity oppty1 = new Opportunity(Name = 'Donut Shop4 - New Biz', CloseDate = Date.today().addDays(7), StageName = 'Prospecting', AccountId = accName.Id);
+        Opportunity oppty2 = new Opportunity(Name = 'Donut Shop5 - New Biz', CloseDate = Date.today().addDays(14), StageName = 'Prospecting', AccountId = accName.Id);
+        Opportunity oppty3 = new Opportunity(Name = 'Donut Shop6 - New Biz', CloseDate = Date.today().addDays(21), StageName = 'Prospecting', AccountId = accName.Id);
+        
+        // Add the Opportunity to the list
+        oppList.add(oppty1);
+        oppList.add(oppty2);
+        oppList.add(oppty3);
+        
     }
     
     /**
@@ -219,10 +231,14 @@ public with sharing class DMLOperations {
      */
     public static void insertAndDeleteLeads(List<String> leadNames) {
         // Loop through each Lead name
-
+        Lead lead1 = new Lead(LastName = 'Smith', Company = 'Test1');
+        Lead Lead2 = new Lead(LastName = 'Fill', Company = 'Test2');
         // Insert the Leads
-
+        insert lead1;
+        insert lead2;
         // Delete the Leads
+        delete lead1;
+        delete lead2;
     }
 
 
@@ -233,8 +249,15 @@ public with sharing class DMLOperations {
      * @param numOfCases The number of cases to create.
      */
     public static void createAndDeleteCases(String accountId, Integer numOfCases) {
+        Account acc = new Account(Name = 'Test Account');
+        insert acc;
+        Case case1 = new Case(Origin = 'New', AccountId = acc.Id);
+        Case case2 = new Case(Origin = 'New', AccountId = acc.Id);
         // Insert the cases
-
+        insert case1;
+        insert case2;
         // Delete the cases
+        delete case1;
+        delete case2;
     }
 }
