@@ -167,20 +167,11 @@ public with sharing class DMLOperations {
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
         // Loop through each Opportunity name.
-        Account acc = [SELECT Id FROM Account WHERE Name = :accountName];
-        upsert acc;
 
-        
         // Create an Opportunity with the given name
-        List<Opportunity> oppList = new List<Opportunity>();
-        
-        for (String oppName : oppNames){
-            Opportunity opp = new Opportunity(Name = 'oppName', CloseDate = Date.today().addDays(7), StageName = 'Prospecting', AccountId = acc.Id);
-        }
         
         // Add the Opportunity to the list
-        oppList.add(opp);
-        
+ 
     }
     
     /**
@@ -192,15 +183,26 @@ public with sharing class DMLOperations {
 	 * @return The Account that was upserted.
 	 */
 	public static Account upsertAccount(String accountName) {
+        
 		// Query for the Account
 		List<Account> accounts = [SELECT Id FROM Account WHERE Name = :accountName];
 
+        Account accountToUpsert;
+
 		// if the Account exists, update the description
-
+        if(!accounts.isEmpty()){
+            accountToUpsert = accounts[0];
+            accountToUpsert.Description = 'Updated Account';
+        }
 		// otherwise, create a new Account and set the description
-
+        else{
+            accountToUpsert = new Account(Name = accountName, Description = 'New Account');
+        }
 		// Upsert the Account
-		return null;
+        upsert accountToUpsert;
+		
+        return accountToUpsert;
+
 	}
 
     /**
