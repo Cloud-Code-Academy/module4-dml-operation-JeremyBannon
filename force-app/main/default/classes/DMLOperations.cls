@@ -166,9 +166,12 @@ public with sharing class DMLOperations {
      * @param oppNames The list of Opportunity names.
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
-        // Loop through each Opportunity name
-            // Create an Opportunity with the given name
-            // Add the Opportunity to the list
+        // Loop through each Opportunity name.
+
+        // Create an Opportunity with the given name
+        
+        // Add the Opportunity to the list
+ 
     }
     
     /**
@@ -180,15 +183,26 @@ public with sharing class DMLOperations {
 	 * @return The Account that was upserted.
 	 */
 	public static Account upsertAccount(String accountName) {
+        
 		// Query for the Account
 		List<Account> accounts = [SELECT Id FROM Account WHERE Name = :accountName];
 
+        Account accountToUpsert;
+
 		// if the Account exists, update the description
-
+        if(!accounts.isEmpty()){
+            accountToUpsert = accounts[0];
+            accountToUpsert.Description = 'Updated Account';
+        }
 		// otherwise, create a new Account and set the description
-
+        else{
+            accountToUpsert = new Account(Name = accountName, Description = 'New Account');
+        }
 		// Upsert the Account
-		return null;
+        upsert accountToUpsert;
+		
+        return accountToUpsert;
+
 	}
 
     /**
@@ -219,10 +233,14 @@ public with sharing class DMLOperations {
      */
     public static void insertAndDeleteLeads(List<String> leadNames) {
         // Loop through each Lead name
-
-        // Insert the Leads
-
+        Lead lead1 = new Lead(LastName = 'Smith', Company = 'Test1');
+        Lead Lead2 = new Lead(LastName = 'Fill', Company = 'Test2');
+        // Insert the Lead
+        insert lead1;
+        insert lead2;
         // Delete the Leads
+        delete lead1;
+        delete lead2;
     }
 
 
@@ -233,8 +251,15 @@ public with sharing class DMLOperations {
      * @param numOfCases The number of cases to create.
      */
     public static void createAndDeleteCases(String accountId, Integer numOfCases) {
+        Account acc = new Account(Name = 'Test Account');
+        insert acc;
+        Case case1 = new Case(Origin = 'New', AccountId = acc.Id);
+        Case case2 = new Case(Origin = 'New', AccountId = acc.Id);
         // Insert the cases
-
+        insert case1;
+        insert case2;
         // Delete the cases
+        delete case1;
+        delete case2;
     }
 }
