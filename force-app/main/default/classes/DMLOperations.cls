@@ -166,7 +166,7 @@ public with sharing class DMLOperations {
      * @param oppNames The list of Opportunity names.
      */
     public static void upsertOpportunities(String accountName, List<String> oppNames) {
-        // Loop through each Opportunity name
+        // Loop through each Opportunity name.
         Account acc = [SELECT Id FROM Account WHERE Name = :accountName];
         upsert acc;
 

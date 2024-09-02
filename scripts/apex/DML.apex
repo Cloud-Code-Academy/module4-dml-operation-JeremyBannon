@@ -1,22 +1,18 @@
 /**
-     * Question 1
-     * Create a new Account object and inserts it into the database.
-     * The Account will have a random name for uniqueness.
-     * @return The Id of the newly created Account.
+     * Question 8
+     * Insert or updates opportunities from list of names.
+     * Associate the Opportunities with account that has the name accountName.
+     * There should be an Opportunity for each name provided in the list.
+     * HINT: The account may or may not exists in the database but is required for opportunity creation. Consider how upsert operation can help with this.
+     * @param accountName The name of the Account.
+     * @param oppNames The list of Opportunity names.
      */
-    public static Id insertNewAccount() {
-        // Create a new Account instance
-    Account acc = new Account();
-        // Set some fields on the Account
-        acc.Name = 'Full Circle SFDC';
-        acc.Website = 'www.fullcirclesfdc.com';
-        acc.Phone = '513-290-7946';
-        // Insert the Account into the database
+    public static void upsertOpportunities(String accountName, List<String> oppNames) {
+        Account acc = new Account(Name = 'Test Account');
         insert acc;
-        // Return the Id of the newly created Account
+
+        // Loop through each Opportunity name
         
-
-        return acc.ID;
+            // Create an Opportunity with the given name
+            // Add the Opportunity to the list
     }
-
-    System.debug(insertNewAccount());
